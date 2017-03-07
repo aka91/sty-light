@@ -1,0 +1,1 @@
+# sty-light
