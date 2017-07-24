@@ -12,15 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
 import java.net.*;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.imgcodecs.Imgcodecs;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
 import java.net.*;
 
 public class javaservertho {
@@ -52,11 +44,9 @@ public class javaservertho {
 
         byte [] mybytearray  = new byte [filesize];
         // create socket
-        ServerSocket servsock = new ServerSocket(5000);
         while (true) {
-            //System.out.println("Waiting...");
-
-            Socket sock = servsock.accept();
+            System.out.println("Waiting...");
+            Socket sock = new Socket("127.0.0.1", 59900);
             //System.out.println("Accepted connection : " + sock);
 
             // receive file

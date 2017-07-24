@@ -58,12 +58,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.AsyncTask;
+import java.io.ByteArrayOutputStream;
 
 public class ScreenCaptureImageActivity extends Activity {
 
     private static final String TAG = ScreenCaptureImageActivity.class.getName();
     private static final int REQUEST_CODE = 100;
-    private static final int port = 5000;
+    private static final int port = 59900;
+    private static final String IP = "127.0.0.1";
     private static String STORE_DIRECTORY;
     private static int IMAGES_PRODUCED;
     private static final String SCREENCAP_NAME = "screencap";
@@ -81,6 +83,7 @@ public class ScreenCaptureImageActivity extends Activity {
     private int mRotation;
     private OrientationChangeCallback mOrientationChangeCallback;
     Socket sock;
+    ServerSocket server;
 
     private class ImageAvailableListener implements ImageReader.OnImageAvailableListener {
         @Override
@@ -104,25 +107,25 @@ public class ScreenCaptureImageActivity extends Activity {
 
                     IMAGES_PRODUCED = IMAGES_PRODUCED % 10;
                     // write bitmap to a file
-                    fos = new FileOutputStream(STORE_DIRECTORY + "/myscreen_" + IMAGES_PRODUCED + ".png");
-                    bitmap.compress(CompressFormat.JPEG, 10, fos);
+                    //fos = new FileOutputStream(STORE_DIRECTORY + "/myscreen_" + IMAGES_PRODUCED + ".png");
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(CompressFormat.JPEG, 20, stream);
 
 
                     IMAGES_PRODUCED++;
                     Log.e(TAG, "captured image: " + IMAGES_PRODUCED);
-                    Socket sock;
                     try {
 
-                        sock = new Socket("192.168.1.69", port);
+                        sock = server.accept();
                         System.out.println("Connecting...");
 
 
                         // sendfile
-                        File myFile = new File (STORE_DIRECTORY + "/myscreen_" + (IMAGES_PRODUCED-1) + ".png");
-                        byte [] mybytearray  = new byte [(int)myFile.length()];
-                        FileInputStream fis = new FileInputStream(myFile);
-                        BufferedInputStream bis = new BufferedInputStream(fis);
-                        bis.read(mybytearray,0,mybytearray.length);
+                        //File myFile = new File (STORE_DIRECTORY + "/myscreen_" + (IMAGES_PRODUCED-1) + ".png");
+                        byte [] mybytearray  = stream.toByteArray();
+                        //FileInputStream fis = new FileInputStream(myFile);
+                        //BufferedInputStream bis = new BufferedInputStream(fis);
+                        //bis.read(mybytearray,0,mybytearray.length);
                         OutputStream os = sock.getOutputStream();
                         System.out.println("Sending...");
                         os.write(mybytearray,0,mybytearray.length);
@@ -230,6 +233,12 @@ public class ScreenCaptureImageActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+
+                try {
+                    server = new ServerSocket(59900);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 startProjection();
             }
         });
@@ -349,6 +358,11 @@ public class ScreenCaptureImageActivity extends Activity {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
+                try {
+                    server.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (sMediaProjection != null) {
                     sMediaProjection.stop();
                 }
@@ -361,22 +375,21 @@ public class ScreenCaptureImageActivity extends Activity {
         // get width and height
         Point size = new Point();
         mDisplay.getSize(size);
-        mWidth = 500;//size.x;
-        mHeight = 900;//size.y;
+        mWidth = size.x/2;
+        mHeight = size.y/2;
 
         // start capture reader
         mImageReader = ImageReader.newInstance(mWidth, mHeight, PixelFormat.RGBA_8888, 2);
         mVirtualDisplay = sMediaProjection.createVirtualDisplay(SCREENCAP_NAME, mWidth, mHeight, mDensity, VIRTUAL_DISPLAY_FLAGS, mImageReader.getSurface(), null, mHandler);
         mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), mHandler);
     }
-
+/*
     private class DiscoveryTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            Socket sock;
             try {
 
-                sock = new Socket("192.168.1.69", port);
+                sock = server.accept();
                 System.out.println("Connecting...");
 
 
@@ -404,7 +417,7 @@ public class ScreenCaptureImageActivity extends Activity {
             return null;
         }
     }
-
+*/
 }
 
 
