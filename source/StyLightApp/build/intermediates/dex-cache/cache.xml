@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="091bea56ff5e4f64e29ab778113d026c6b42ea10">
+        <dex dex="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_b2ca50e2001a1ab7166c92dfebf74e3826e85932/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Arsenal/.android/build-cache/5b026382e540ed6924e59150b58ec860283cc496/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_28b4e57522ee08c85d5c6c795367499527fdbce3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Arsenal/.android/build-cache/e830804ebf86b7b576df51ed89eedf96c9f42bb8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6276b17d7909e532df7ec6513dae36f3651c7804/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Arsenal/.android/build-cache/b91868d1800df70bcd62ce02a9a0c5bd691f3e43/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a4298b8aab34fafea70049385856cf6def33ba95/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/Arsenal/Desktop/StyLight/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_297aef5a3e684b68ed7cf2d0b0c98e23904dabf8/classes.dex" />
+    </item>
+
+</items>
